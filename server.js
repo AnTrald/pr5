@@ -19,11 +19,11 @@ let users = []; // "База данных" пользователей
 app.post('/register', (req, res) => {
     const { username, password } = req.body;
     if (users.find(u => u.username === username)) {
-        return res.status(400).json({ message: 'User already exists' });
+        return res.status(400).json({ message: 'Пользователь уже существует' });
     }
     const newUser = { id: users.length + 1, username, password };
     users.push(newUser);
-    res.status(201).json({ message: 'User registered successfully' });
+    res.status(201).json({ message: 'Пользователь успешно зарегестрирован' });
 });
 
 app.post('/login', (req, res)=>{
@@ -34,7 +34,7 @@ app.post('/login', (req, res)=>{
         const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {expiresIn: '1h' });
         res.json({ token });
     } else {
-        res.status(401).json({ message: 'Invalid credentials' });
+        res.status(401).json({ message: 'Неверные учетные данные' });
     }
 });
 
